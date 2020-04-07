@@ -5,6 +5,9 @@ from .. import models
 
 class EvalSectionSerializer(MaskFieldSerializer, TrackTimeSerializer):
 
+    evaluation = serializers.PrimaryKeyRelatedField(
+        queryset=models.Evaluation.objects.all()
+    )
     status = serializers.ChoiceField(
         required=False,
         choices=models.EvalSection.STATUS_CHOICES
@@ -36,6 +39,7 @@ class EvalSectionSerializer(MaskFieldSerializer, TrackTimeSerializer):
 
     class Meta:
         fields = TrackTimeSerializer.Meta.fields + (
+            'evaluation',
             'status',
             'result',
             'passed',
