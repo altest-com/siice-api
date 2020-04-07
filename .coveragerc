@@ -1,0 +1,10 @@
+[run]
+branch = True
+include =
+    api/*
+    users/*
+[report]
+ignore_errors = True
+omit =
+    */tests/*
+    */migrations/*
