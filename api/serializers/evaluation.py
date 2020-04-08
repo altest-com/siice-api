@@ -6,7 +6,7 @@ from .. import models
 class EvalSectionSerializer(MaskFieldSerializer, TrackTimeSerializer):
 
     evaluation = serializers.PrimaryKeyRelatedField(
-        queryset=models.Evaluation.objects.all()
+        read_only=True
     )
     status = serializers.ChoiceField(
         required=False,
@@ -62,32 +62,26 @@ class EvaluationSerializer(MaskFieldSerializer, TrackTimeSerializer):
     )
     application = serializers.PrimaryKeyRelatedField(
         queryset=models.Application.objects.all(),
-        required=True,
         help_text='Evaluation application'
     )
     socioeconomic = serializers.PrimaryKeyRelatedField(
-        queryset=models.Socioeconomic.objects.all(),
-        required=True,
+        read_only=True,
         help_text='Socioeconomic evaluation'
     )
     medical = serializers.PrimaryKeyRelatedField(
-        queryset=models.Medical.objects.all(),
-        required=True,
+        read_only=True,
         help_text='Medical evaluation'
     )
     toxicological = serializers.PrimaryKeyRelatedField(
-        queryset=models.Toxicological.objects.all(),
-        required=True,
+        read_only=True,
         help_text='Toxicological evaluation'
     )
     psychological = serializers.PrimaryKeyRelatedField(
-        queryset=models.Psychological.objects.all(),
-        required=True,
+        read_only=True,
         help_text='Psychological evaluation'
     )
     polygraphic = serializers.PrimaryKeyRelatedField(
-        queryset=models.Polygraphic.objects.all(),
-        required=True,
+        read_only=True,
         help_text='Polygraphic evaluation'
     )
 

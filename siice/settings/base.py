@@ -113,7 +113,6 @@ REST_FRAMEWORK = {
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.realpath(os.path.join(BASE_DIR, 'storage/media'))
-IMAGES_PATH = 'images/'
 
 # Logging
 LOGGER_NAME = 'siice'

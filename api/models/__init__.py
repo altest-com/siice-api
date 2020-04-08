@@ -13,4 +13,4 @@ from .polygraphic import Polygraphic
 from .psychological import Psychological
 from .socioeconomic import Socioeconomic
 from .toxicological import Toxicological
-from .file import Image
+from .file import Image, File

@@ -13,4 +13,4 @@ from .polygraphic import PolygraphicSerializer
 from .psychological import PsychologicalSerializer
 from .socioeconomic import SocioeconomicSerializer
 from .toxicological import ToxicologicalSerializer
-from .file import ImageSerializer
+from .file import ImageSerializer, FileSerializer

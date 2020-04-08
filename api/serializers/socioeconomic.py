@@ -24,7 +24,7 @@ class SocioeconomicSerializer(EvalSectionSerializer):
 
     digi_id_number = serializers.CharField(
         required=False,
-        allow_null=True
+        allow_blank=True
     )
 
     digi_image = serializers.PrimaryKeyRelatedField(

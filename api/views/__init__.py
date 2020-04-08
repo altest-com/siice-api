@@ -13,4 +13,4 @@ from .polygraphic import PolygraphicView
 from .psychological import PsychologicalView
 from .socioeconomic import SocioeconomicView
 from .toxicological import ToxicologicalView
-from .file import ImageView
+from .file import ImageView, FileView

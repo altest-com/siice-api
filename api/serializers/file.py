@@ -17,3 +17,15 @@ class ImageSerializer(TrackTimeSerializer, MaskFieldSerializer):
             'height',
             'width'
         )
+
+
+class FileSerializer(TrackTimeSerializer, MaskFieldSerializer):
+
+    size_bytes = serializers.IntegerField(read_only=True)
+
+    class Meta:
+        model = models.Image
+        fields = TrackTimeSerializer.Meta.fields + (
+            'file',
+            'size_bytes'
+        )

@@ -65,7 +65,7 @@ class Application(TrackTimeModel):
 
     document = models.CharField(max_length=255)
 
-    document_year = models.IntegerField()
+    year = models.IntegerField()
 
     status = models.CharField(
         max_length=255,

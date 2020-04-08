@@ -26,3 +26,20 @@ class ImageView(
 
     def get_queryset(self):
         return self.queryset
+
+
+class FileView(
+    CreateMixin,
+    ListMixin,
+    RetrieveMixin,
+    DestroyMixin,
+    UpdateMixin,
+    viewsets.GenericViewSet
+):
+    lookup_field = 'pk'
+    model_name = 'File'
+    queryset = models.File.objects.all()
+    serializer_class = serializers.FileSerializer
+
+    def get_queryset(self):
+        return self.queryset

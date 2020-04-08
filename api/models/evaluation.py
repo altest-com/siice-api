@@ -22,7 +22,7 @@ class EvalSection(TrackTimeModel):
 
     result = models.TextField(blank=True, default='')
 
-    passed = models.TextField(blank=True, null=True)
+    passed = models.BooleanField(blank=True, null=True)
 
     alert = models.TextField(blank=True, default='')
 

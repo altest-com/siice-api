@@ -108,13 +108,18 @@ class PositionSerializer(TrackTimeSerializer, MaskFieldSerializer):
 
 class ApplicationSerializer(TrackTimeSerializer, MaskFieldSerializer):
 
+    evaluation = serializers.PrimaryKeyRelatedField(
+        read_only=True,
+        help_text='Application evaluation'
+    )
+
     # Required
     document = serializers.CharField(
         required=True,
         help_text='Application document'
     )
 
-    document_year = serializers.IntegerField(
+    year = serializers.IntegerField(
         required=True,
         help_text='Application document year'
     )
@@ -173,9 +178,9 @@ class ApplicationSerializer(TrackTimeSerializer, MaskFieldSerializer):
     class Meta:
         model = models.Application
         fields = TrackTimeSerializer.Meta.fields + (
-            'name',
+            'evaluation',
             'document',
-            'document_year',
+            'year',
             'status',
             'candidate',
             'corporation',
