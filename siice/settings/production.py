@@ -2,6 +2,10 @@ from .base import *
 
 DEBUG = False
 
+_hosts = os.environ.get('SIICE_ALLOWED_HOSTS')
+
+ALLOWED_HOSTS.extend(_hosts.split(','))
+
 SECRET_KEY = os.environ['SIICE_SECRET_KEY']
 
 SPA_DIR = os.environ.get('SIICE_SPA_DIR', '')
