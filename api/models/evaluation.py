@@ -24,19 +24,12 @@ class EvalSection(TrackTimeModel):
 
     passed = models.BooleanField(blank=True, null=True)
 
-    alert = models.TextField(blank=True, default='')
-
     started_at = models.DateTimeField(
         null=True,
         blank=True
     )
 
     finished_at = models.DateTimeField(
-        null=True,
-        blank=True
-    )
-
-    alerted_at = models.DateTimeField(
         null=True,
         blank=True
     )
@@ -103,3 +96,31 @@ class Evaluation(TrackTimeModel):
         on_delete=models.CASCADE,
         related_name='evaluation'
     )
+
+
+class Alert(TrackTimeModel):
+
+    SECTION_SOCIOECONOMIC = 'socioeconomic'
+    SECTION_MEDICAL = 'medical'
+    SECTION_POLYGRAPHIC = 'polygraphic'
+    SECTION_PSYCHOLOGICAL = 'psychological'
+    SECTION_TOXICOLOGICAL = 'toxicological'
+
+    SECTION_CHOICES = [
+        (SECTION_SOCIOECONOMIC, 'socioeconomic'),
+        (SECTION_MEDICAL, 'medical'),
+        (SECTION_POLYGRAPHIC, 'polygraphic'),
+        (SECTION_PSYCHOLOGICAL, 'psychological'),
+        (SECTION_TOXICOLOGICAL, 'toxicological'),
+    ]
+
+    evaluation = models.ForeignKey(
+        'Evaluation',
+        on_delete=models.CASCADE,
+        related_name='alerts'
+    )
+
+    info = models.TextField()
+
+    section = models.CharField(max_length=64, choices=SECTION_CHOICES)
+

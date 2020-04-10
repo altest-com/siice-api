@@ -1,5 +1,5 @@
 siice-api
-======
+=========
 
 ![Python](https://img.shields.io/badge/python-v3.6+-blue.svg)
 [![Build Status](https://travis-ci.com/altest-com/siice-api.svg?branch=master)](https://travis-ci.com/raikel/siice)

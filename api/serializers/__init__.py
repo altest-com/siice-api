@@ -7,7 +7,7 @@ from .application import (
     ApplicationSerializer
 )
 
-from .evaluation import EvaluationSerializer
+from .evaluation import EvaluationSerializer, AlertSerializer
 from .medical import MedicalSerializer
 from .polygraphic import PolygraphicSerializer
 from .psychological import PsychologicalSerializer

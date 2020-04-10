@@ -20,19 +20,11 @@ class EvalSectionSerializer(MaskFieldSerializer, TrackTimeSerializer):
         required=False,
         allow_null=True
     )
-    alert = serializers.CharField(
-        required=False,
-        allow_blank=True
-    )
     started_at = serializers.DateTimeField(
         required=False,
         allow_null=True
     )
     finished_at = serializers.DateTimeField(
-        required=False,
-        allow_null=True
-    )
-    alerted_at = serializers.DateTimeField(
         required=False,
         allow_null=True
     )
@@ -43,10 +35,8 @@ class EvalSectionSerializer(MaskFieldSerializer, TrackTimeSerializer):
             'status',
             'result',
             'passed',
-            'alert',
             'started_at',
-            'finished_at',
-            'alerted_at'
+            'finished_at'
         )
 
 
@@ -96,4 +86,26 @@ class EvaluationSerializer(MaskFieldSerializer, TrackTimeSerializer):
             'toxicological',
             'psychological',
             'polygraphic'
+        )
+
+
+class AlertSerializer(MaskFieldSerializer, TrackTimeSerializer):
+
+    section = serializers.ChoiceField(
+        choices=models.Alert.SECTION_CHOICES
+    )
+
+    info = serializers.CharField()
+
+    evaluation = serializers.PrimaryKeyRelatedField(
+        queryset=models.Evaluation.objects.all(),
+        help_text='Alert evaluation'
+    )
+
+    class Meta:
+        model = models.Alert
+        fields = TrackTimeSerializer.Meta.fields + (
+            'section',
+            'info',
+            'evaluation'
         )

@@ -2,21 +2,29 @@ from .base import *
 
 DEBUG = False
 
-SPA_DIR = '/home/ronin/Projects/active/dnfas-ui/dist/'
+SECRET_KEY = os.environ['SIICE_SECRET_KEY']
+
+SPA_DIR = os.environ.get('SIICE_SPA_DIR', '')
+
+if SPA_DIR:
+    SPA_DIR = os.path.realpath(SPA_DIR)
+    TEMPLATES[0]['DIRS'] = [SPA_DIR]
+
+    STATICFILES_DIRS = [
+        os.path.realpath(os.path.join(SPA_DIR, 'static'))
+    ]
 
 MIDDLEWARE.remove('corsheaders.middleware.CorsMiddleware')
-
-TEMPLATES[0]['DIRS'] = [SPA_DIR]
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dnfas',
-        'USER': 'dnfas',
-        'PASSWORD': '123',
-        'HOST': 'localhost',
+        'NAME': os.environ['SIICE_DB_NAME'],
+        'USER': os.environ['SIICE_DB_USER'],
+        'PASSWORD': os.environ['SIICE_DB_PASSWORD'],
+        'HOST': os.environ['SIICE_DB_HOST'],
         'PORT': '',
     }
 }
@@ -49,13 +57,3 @@ REST_FRAMEWORK.update({
     ]
 })
 
-STATICFILES_DIRS = [
-    os.path.realpath(os.path.join(SPA_DIR, 'static')),
-]
-
-# Enable CORS for specified domains:
-CORS_ORIGIN_ALLOW_ALL = True
-#
-# CORS_ORIGIN_WHITELIST = (
-#     'http://localhost',
-# )

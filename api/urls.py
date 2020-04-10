@@ -19,5 +19,6 @@ router.register(r'socioeconomics', views.SocioeconomicView, 'socioeconomics')
 router.register(r'toxicologicals', views.ToxicologicalView, 'toxicologicals')
 router.register(r'images', views.ImageView, 'images')
 router.register(r'files', views.FileView, 'files')
+router.register(r'alerts', views.AlertView, 'alerts')
 
 urlpatterns = router.urls

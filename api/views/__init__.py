@@ -7,7 +7,7 @@ from .application import (
     ApplicationView
 )
 
-from .evaluation import EvaluationView
+from .evaluation import EvaluationView, AlertView
 from .medical import MedicalView
 from .polygraphic import PolygraphicView
 from .psychological import PsychologicalView

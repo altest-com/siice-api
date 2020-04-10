@@ -7,7 +7,7 @@ from .application import (
     Application
 )
 
-from .evaluation import Evaluation, EvalSection
+from .evaluation import Evaluation, EvalSection, Alert
 from .medical import Medical
 from .polygraphic import Polygraphic
 from .psychological import Psychological
