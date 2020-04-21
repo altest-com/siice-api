@@ -6,3 +6,5 @@ class ApiConfig(AppConfig):
 
     def ready(self):
         from . import signals
+        from .services import create_schemas
+        create_schemas()

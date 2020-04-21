@@ -5,6 +5,9 @@ from .. import models
 
 class EvalSectionSerializer(MaskFieldSerializer, TrackTimeSerializer):
 
+    eval_data = serializers.PrimaryKeyRelatedField(
+        read_only=True
+    )
     evaluation = serializers.PrimaryKeyRelatedField(
         read_only=True
     )
@@ -31,6 +34,7 @@ class EvalSectionSerializer(MaskFieldSerializer, TrackTimeSerializer):
 
     class Meta:
         fields = TrackTimeSerializer.Meta.fields + (
+            'eval_data',
             'evaluation',
             'status',
             'result',

@@ -4,6 +4,13 @@ from django.db import models
 
 class Socioeconomic(EvalSection):
 
+    eval_data = models.OneToOneField(
+        'drf_schemas.Item',
+        null=True,
+        on_delete=models.CASCADE,
+        related_name='socioeconomic_eval'
+    )
+
     DIGI_ENTRY_EMPTY = 'empty'
 
     DIGI_ENTRY_CHOICES = [

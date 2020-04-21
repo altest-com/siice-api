@@ -24,7 +24,7 @@ class FileSerializer(TrackTimeSerializer, MaskFieldSerializer):
     size_bytes = serializers.IntegerField(read_only=True)
 
     class Meta:
-        model = models.Image
+        model = models.File
         fields = TrackTimeSerializer.Meta.fields + (
             'file',
             'size_bytes'
