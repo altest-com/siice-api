@@ -5,4 +5,4 @@ django-cors-headers>=3.0.2
 Pillow>=6.1.0
 psycopg2-binary>=2.8.4
 gunicorn>=19.9.0
-drf_schemas>=0.1.1
+drf_schemas>=0.1.2
