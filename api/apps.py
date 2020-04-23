@@ -11,6 +11,7 @@ class ApiConfig(AppConfig):
     name = 'api'
 
     def ready(self):
+        from . import signals
         try:
             from .services import create_schemas
             create_schemas()
