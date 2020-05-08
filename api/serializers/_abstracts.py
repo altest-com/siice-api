@@ -34,3 +34,7 @@ class TrackTimeSerializer:
             'created_at',
             'updated_at'
         )
+
+
+def descent_orders(orders):
+    return tuple(orders) + tuple(['-' + order for order in orders])

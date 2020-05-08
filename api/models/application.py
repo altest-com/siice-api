@@ -1,3 +1,5 @@
+from django.utils.functional import cached_property
+
 from ._abstracts import TrackTimeModel
 from django.db import models
 
@@ -43,10 +45,31 @@ class Secondment(TrackTimeModel):
         related_name='secondments'
     )
 
+    @cached_property
+    def corporation(self):
+        # noinspection PyUnresolvedReferences
+        return self.dependency.corporation
+
 
 class Position(TrackTimeModel):
 
     name = models.CharField(max_length=255)
+
+    secondment = models.ForeignKey(
+        'Secondment',
+        on_delete=models.CASCADE,
+        related_name='positions'
+    )
+
+    @cached_property
+    def dependency(self):
+        # noinspection PyUnresolvedReferences
+        return self.secondment.dependency
+
+    @cached_property
+    def corporation(self):
+        # noinspection PyUnresolvedReferences
+        return self.dependency.corporation
 
 
 class Application(TrackTimeModel):
@@ -79,27 +102,10 @@ class Application(TrackTimeModel):
         related_name='applications'
     )
 
-    corporation = models.ForeignKey(
-        'Corporation',
-        on_delete=models.CASCADE,
-        related_name='applications'
-    )
-
-    dependency = models.ForeignKey(
-        'Dependency',
-        on_delete=models.CASCADE,
-        related_name='applications'
-    )
-
-    secondment = models.ForeignKey(
-        'Secondment',
-        on_delete=models.CASCADE,
-        related_name='applications'
-    )
-
     position = models.ForeignKey(
         'Position',
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
+        null=True,
         related_name='applications'
     )
 
@@ -117,3 +123,18 @@ class Application(TrackTimeModel):
         null=True,
         blank=True
     )
+
+    @cached_property
+    def secondment(self):
+        # noinspection PyUnresolvedReferences
+        return self.position.secondment
+
+    @cached_property
+    def dependency(self):
+        # noinspection PyUnresolvedReferences
+        return self.secondment.dependency
+
+    @cached_property
+    def corporation(self):
+        # noinspection PyUnresolvedReferences
+        return self.dependency.corporation

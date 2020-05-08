@@ -60,3 +60,4 @@ def fill_evaluation(evaluation: Evaluation):
             eval_data = Item.objects.create(schema=schema)
             eval_section = section['model'].objects.create(eval_data=eval_data)
             setattr(evaluation, section['field'], eval_section)
+

@@ -1,3 +1,4 @@
+from django.urls import path
 from rest_framework.routers import SimpleRouter
 
 from . import views
@@ -22,3 +23,4 @@ router.register(r'files', views.FileView, 'files')
 router.register(r'alerts', views.AlertView, 'alerts')
 
 urlpatterns = router.urls
+

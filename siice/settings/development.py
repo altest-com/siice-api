@@ -7,10 +7,22 @@ DEBUG = True
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ['SIICE_DB_NAME'],
+        'USER': os.environ['SIICE_DB_USER'],
+        'PASSWORD': os.environ['SIICE_DB_PASSWORD'],
+        'HOST': os.environ['SIICE_DB_HOST'],
+        'PORT': '',
+        'CONN_MAX_AGE': 0
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 # Django rest framework
 REST_FRAMEWORK.update({
