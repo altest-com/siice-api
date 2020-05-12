@@ -24,6 +24,11 @@ class EvalSection(TrackTimeModel):
 
     passed = models.BooleanField(blank=True, null=True)
 
+    scheduled_at = models.DateTimeField(
+        null=True,
+        blank=True
+    )
+
     started_at = models.DateTimeField(
         null=True,
         blank=True
@@ -40,25 +45,110 @@ class EvalSection(TrackTimeModel):
 
 class Evaluation(TrackTimeModel):
 
-    TYPE_ORDINARY = 'ordinary'
-    TYPE_EXTRA = 'extra'
-    TYPE_REPEAT = 'repeat'
+    TYPE_ENTRANT = 'entrant'
+    TYPE_REENTRANT = 'reentrant'
+    TYPE_PERMANENCE = 'permanence'
+    TYPE_PROMOTION = 'promotion'
 
     TYPE_CHOICES = [
-        (TYPE_ORDINARY, 'ordinary'),
-        (TYPE_EXTRA, 'extra'),
-        (TYPE_REPEAT, 'repeat')
+        (TYPE_ENTRANT, 'entrant'),
+        (TYPE_REENTRANT, 'reentrant'),
+        (TYPE_PERMANENCE, 'permanence'),
+        (TYPE_PROMOTION, 'promotion'),
+    ]
+
+    MODE_ORDINARY = 'ordinary'
+    MODE_EXTRA = 'extra'
+    MODE_REPEAT = 'repeat'
+
+    MODE_CHOICES = [
+        (MODE_ORDINARY, 'ordinary'),
+        (MODE_EXTRA, 'extra'),
+        (MODE_REPEAT, 'repeat')
+    ]
+
+    RESOURCES_FORTASEG = 'fortaseg'
+    RESOURCES_FASP = 'fasp'
+    RESOURCES_OTHER = 'other'
+
+    RESOURCES_CHOICES = [
+        (RESOURCES_FORTASEG, 'fortaseg'),
+        (RESOURCES_FASP, 'fasp'),
+        (RESOURCES_OTHER, 'other')
+    ]
+
+    SCHEMA_INTEGRAL = 'integral'
+    SCHEMA_DIFFERENTIATED = 'differentiated'
+    SCHEMA_FILTER = 'filter'
+
+    SCHEMA_CHOICES = [
+        (SCHEMA_INTEGRAL, 'integral'),
+        (SCHEMA_DIFFERENTIATED, 'differentiated'),
+        (SCHEMA_FILTER, 'filter')
+    ]
+
+    STATUS_CREATED = 'created'
+    STATUS_ISE_AUTH_PENDING = 'ise_auth_pending'
+    STATUS_INT_AUTH_PENDING = 'int_auth_pending'
+    STATUS_SCHEDULE_PENDING = 'schedule_pending'
+    STATUS_SCHEDULED = 'schedule_pending'
+    STATUS_DONT_EVAL = 'dont_eval'
+    STATUS_NOT_EVALUABLE = 'not_evaluable'
+
+    STATUS_CHOICES = [
+        (STATUS_CREATED, 'created'),
+        (STATUS_ISE_AUTH_PENDING, 'ise_auth_pending'),
+        (STATUS_INT_AUTH_PENDING, 'int_auth_pending'),
+        (STATUS_SCHEDULE_PENDING, 'schedule_pending'),
+        (STATUS_SCHEDULED, 'schedule_pending'),
+        (STATUS_DONT_EVAL, 'dont_eval'),
+        (STATUS_NOT_EVALUABLE, 'not_evaluable')
+    ]
+
+    REASON_NONE = 'none'
+    REASON_PERIODIC = 'periodic'
+    REASON_TRACKING = 'tracking'
+
+    REASON_CHOICES = [
+        (REASON_NONE, 'none'),
+        (REASON_PERIODIC, 'periodic'),
+        (REASON_TRACKING, 'tracking')
     ]
 
     type = models.CharField(
         max_length=255,
         choices=TYPE_CHOICES,
-        default=TYPE_ORDINARY
+        default=TYPE_ENTRANT
     )
 
-    scheduled_at = models.DateTimeField(
-        null=True,
-        blank=True
+    mode = models.CharField(
+        max_length=255,
+        choices=MODE_CHOICES,
+        default=MODE_ORDINARY
+    )
+
+    resources = models.CharField(
+        max_length=255,
+        choices=RESOURCES_CHOICES,
+        default=RESOURCES_FORTASEG
+    )
+
+    schema = models.CharField(
+        max_length=255,
+        choices=SCHEMA_CHOICES,
+        default=SCHEMA_INTEGRAL
+    )
+
+    status = models.CharField(
+        max_length=255,
+        choices=STATUS_CHOICES,
+        default=STATUS_CREATED
+    )
+
+    reason = models.CharField(
+        max_length=255,
+        choices=REASON_CHOICES,
+        default=REASON_NONE
     )
 
     application = models.OneToOneField(

@@ -6,9 +6,26 @@ from ._mixins import (
     RetrieveMixin,
     DestroyMixin,
     UpdateMixin,
+    FilterMixin
 )
 from .. import models
 from .. import serializers
+
+
+class EvalSectionView(
+    CreateMixin,
+    ListMixin,
+    RetrieveMixin,
+    DestroyMixin,
+    UpdateMixin,
+    FilterMixin,
+    viewsets.GenericViewSet
+):
+    lookup_field = 'pk'
+    filter_serializer_class = serializers.EvalSectionFilterSerializer
+    multi_query = (
+        'status__in'
+    )
 
 
 class EvaluationView(
@@ -17,15 +34,23 @@ class EvaluationView(
     RetrieveMixin,
     DestroyMixin,
     UpdateMixin,
+    FilterMixin,
     viewsets.GenericViewSet
 ):
     lookup_field = 'pk'
     model_name = 'Evaluation'
     queryset = models.Evaluation.objects.all()
     serializer_class = serializers.EvaluationSerializer
-
-    def get_queryset(self):
-        return self.queryset
+    filter_serializer_class = serializers.EvaluationFilterSerializer
+    multi_query = (
+        'type__in',
+        'application__candidate_id__in',
+        'application__status__in',
+        'application__position__secondment__dependency__corporation_id__in',
+        'application__position__secondment__dependency_id__in',
+        'application__position__secondment_id__in',
+        'application__position_id__in'
+    )
 
 
 class AlertView(

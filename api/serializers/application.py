@@ -269,9 +269,9 @@ class ApplicationSerializer(TrackTimeSerializer, MaskFieldSerializer):
         help_text='Application document'
     )
 
-    year = serializers.IntegerField(
+    date = serializers.DateField(
         required=True,
-        help_text='Application document year'
+        help_text='Application document date'
     )
 
     status = serializers.ChoiceField(
@@ -329,7 +329,7 @@ class ApplicationSerializer(TrackTimeSerializer, MaskFieldSerializer):
         fields = TrackTimeSerializer.Meta.fields + (
             'evaluation',
             'document',
-            'year',
+            'date',
             'status',
             'candidate',
             'corporation',
@@ -357,9 +357,9 @@ class ApplicationFilterSerializer(serializers.Serializer):
 
     document__icontains = serializers.CharField(required=False)
 
-    year__gte = serializers.IntegerField(required=False)
+    date__gte = serializers.DateField(required=False)
 
-    year__lte = serializers.IntegerField(required=False)
+    date__lte = serializers.DateField(required=False)
 
     status__in = serializers.ListSerializer(
         child=serializers.ChoiceField(
@@ -395,7 +395,7 @@ class ApplicationFilterSerializer(serializers.Serializer):
     order_by = serializers.ChoiceField(
         choices=descent_orders((
             'document',
-            'year',
+            'date',
             'status',
             'candidate__last_name',
             'position__name',
